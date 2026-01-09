@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ✨ Custom Animation Utilities for NGO Project
+   Works with Tailwind v4
+   ============================================================ */
+
+/* Fade Up */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Float (gentle up-down motion) */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-10px); }
+}
+
+/* Glow (soft background light pulsing) */
+@keyframes glow {
+  0%,100% { opacity: .55; filter: blur(40px); }
+  50%     { opacity: .9;  filter: blur(60px); }
+}
+
+/* Shine (quick light sweep effect) */
+@keyframes shine {
+  0%   { transform: translateX(-120%) rotate(12deg); }
+  100% { transform: translateX(220%)  rotate(12deg); }
+}
+
+/* Pop (subtle bounce for buttons or success states) */
+@keyframes pop {
+  0%   { transform: scale(.9);   opacity: .8; }
+  60%  { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+/* ============================================================
+   🌀 Animation Classes
+   ============================================================ */
+.animate-fade-up { animation: fade-up .8s cubic-bezier(.2,.7,.2,1) both; }
+.animate-float   { animation: float 5.5s ease-in-out infinite; }
+.animate-glow    { animation: glow 6s ease-in-out infinite; }
+.animate-shine   { animation: shine 1.2s ease-out 1; }
+.animate-pop     { animation: pop .35s ease-out both; }
+
+/* ============================================================
+   🌐 Global Styles (optional)
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#0b1220] text-white font-sans antialiased;
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Card hover effects */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive text adjustments */
+@media (max-width: 640px) {
+  .text-6xl {
+    font-size: 3rem;
+  }
+}
+
+/* Custom scrollbar for cards on mobile */
+@media (max-width: 768px) {
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}

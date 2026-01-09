@@ -1,0 +1,99 @@
+.footer {
+  position: relative;
+  text-align: center;
+  padding: 40px 20px;
+  color: #fff;
+  overflow: hidden;
+  z-index: 1;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInFooter 1.5s ease-in-out forwards;
+  background: linear-gradient(135deg, #219ebc, #8ecae6, #ffb703, #fb8500);
+  background-size: 400% 400%;
+  animation: bgAnimation 10s ease infinite;
+}
+
+/* Background gradient animation */
+@keyframes bgAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Smooth fade in */
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text */
+.footer p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  margin: 10px 0 0;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Social icons */
+.footer .socials {
+  margin-top: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer .socials a {
+  margin: 0 10px;
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  transform: translateY(0);
+}
+
+.footer .socials a:hover {
+  color: #ffb703;
+  transform: translateY(-5px) scale(1.2);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Moving light overlay (shine effect) */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: shine 5s infinite;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
