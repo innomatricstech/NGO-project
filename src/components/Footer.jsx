@@ -1,166 +1,151 @@
 // src/components/Footer.jsx
 import React from "react";
+import logo from "../assets/logo.png";
+import { Phone, Mail, Globe, MapPin } from "lucide-react";
+import { Link } from "react-router-dom"; // ✅ ADD ONLY THIS
 
 export default function Footer() {
   return (
-    <footer
-      className="
-        relative overflow-hidden
-        bg-[#0b1220] text-white
-        px-6 py-16 sm:py-20
-        border-t border-white/10
-      "
-    >
-      {/* soft glows */}
-      <div className="pointer-events-none absolute -top-40 left-0 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(closest-side,rgba(79,141,245,.18),transparent)] animate-glow" />
-      <div className="pointer-events-none absolute -bottom-40 right-0 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(closest-side,rgba(124,92,255,.18),transparent)] animate-glow" style={{ animationDelay: "900ms" }} />
+    <footer className="relative overflow-hidden bg-[#0b1220] text-white border-t border-white/10">
 
-      <div className="mx-auto max-w-7xl">
-        {/* top row */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 animate-fade-up">
-          {/* Brand */}
+      {/* Glow effects */}
+      <div className="pointer-events-none absolute -top-40 left-0 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(closest-side,rgba(79,141,245,.18),transparent)]" />
+      <div className="pointer-events-none absolute -bottom-40 right-0 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(closest-side,rgba(124,92,255,.18),transparent)]" />
+
+      {/* FULL WIDTH CONTAINER */}
+      <div className="relative z-10 w-full px-5 sm:px-8 lg:px-16 xl:px-24 py-16">
+
+        {/* GRID */}
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+
+          {/* BRAND */}
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <img
-                src="/mnt/data/55e97727-134a-43f4-9027-2bacfd8977e2.png"
-                alt="HopeForAll Logo"
-                className="h-12 w-12 rounded-lg object-cover ring-1 ring-white/20"
+                src={logo}
+                alt="Trishula Trust Logo"
+                className="h-[90px] w-[90px] sm:h-[110px] sm:w-[110px] rounded-full object-cover ring-2 ring-blue-400"
               />
               <div>
-                <h2 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-                  HopeForAll
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-300">
+                  TRISHULA TRUST
                 </h2>
-                <p className="text-[11px] text-white/60">Since 2010</p>
+                <p className="text-base sm:text-lg text-blue-200 font-semibold">
+                  Educational & Charitable
+                </p>
               </div>
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-slate-300 max-w-xs">
-              We empower underprivileged children with education, nutrition,
-              safety and the voice to shape their future.
+            <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-md">
+              Empowering underprivileged children through education, nutrition
+              and safety for a brighter future.
             </p>
 
-            {/* trust badges */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              {[
-                ["80G/12A", "Programs-First"],
-                ["CSR-1", "Compliant"],
-                ["Audited", "Annually"],
-              ].map(([a, b]) => (
+            {/* BADGES */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {["80G Certified", "12A Registered", "CSR-1 Approved"].map((b) => (
                 <span
-                  key={a}
-                  className="rounded-full bg-white/8 px-3 py-1 text-[11px] text-white/90 ring-1 ring-white/15"
+                  key={b}
+                  className="text-base px-5 py-2 rounded-full bg-white/10 ring-1 ring-white/15"
                 >
-                  <span className="font-semibold">{a}</span> • {b}
+                  {b}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* QUICK LINKS (ONLY UPDATED PART) */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-            <ul className="space-y-2 text-slate-300 text-sm">
-              <li><a href="#home" className="hover:text-[#F6C20E] transition">Home</a></li>
-              <li><a href="#about" className="hover:text-[#F6C20E] transition">About Us</a></li>
-              <li><a href="#causes" className="hover:text-[#F6C20E] transition">What We Do</a></li>
-              <li><a href="#donate" className="hover:text-[#F6C20E] transition">Donate</a></li>
-              <li><a href="#contact" className="hover:text-[#F6C20E] transition">Contact</a></li>
+            <h3 className="text-2xl font-bold mb-5 text-blue-200">
+              Quick Links
+            </h3>
+            <ul className="space-y-4 text-lg text-slate-300">
+              {[
+                { name: "Home", path: "/" },
+                { name: "About Us", path: "/about" },
+                { name: "Causes", path: "/causes" },
+                { name: "Donate", path: "/donate" },
+                { name: "Contact", path: "/contact" },
+              ].map((l) => (
+                <li key={l.name}>
+                  <Link
+                    to={l.path}
+                    onClick={() => window.scrollTo(0, 0)} // ✅ ONLY REQUIRED UPDATE
+                    className="hover:text-yellow-400 transition"
+                  >
+                    {l.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-
-            {/* Newsletter */}
-            <div className="mt-5">
-              <p className="text-sm text-slate-300 mb-2">Subscribe for updates</p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="flex overflow-hidden rounded-xl ring-1 ring-white/15 bg-white/5 backdrop-blur"
-              >
-                <input
-                  type="email"
-                  required
-                  placeholder="your@email.com"
-                  className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder:text-white/50 outline-none"
-                />
-                <button
-                  className="px-4 text-sm font-semibold text-black hover:-translate-y-0.5 transition"
-                  style={{ backgroundColor: "#F6C20E" }}
-                >
-                  Join
-                </button>
-              </form>
-            </div>
           </div>
 
-          {/* Address */}
+          {/* LOCATION */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Address</h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              HopeForAll Foundation <br />
-              123 Charity Avenue, Greenfield Colony,<br />
-              Hyderabad, Telangana – 500089, India
+            <h3 className="text-2xl font-bold mb-5 text-blue-200 flex items-center gap-2">
+              <MapPin size={22} /> Our Location
+            </h3>
+
+            <p className="text-lg text-slate-300 mb-5 leading-relaxed">
+              Trishula Trust <br />
+              Hyderabad, Telangana – 500089 <br />
+              India
             </p>
 
-            <h4 className="mt-4 text-sm font-semibold text-white">Office Hours</h4>
-            <p className="text-slate-300 text-sm">Mon–Sat: 10:00 AM – 6:00 PM</p>
+            <div className="overflow-hidden rounded-xl border border-white/15 shadow-lg">
+              <iframe
+                title="Trishula Trust Location"
+                src="https://www.google.com/maps?q=Hyderabad+Telangana+500089&output=embed"
+                width="100%"
+                height="220"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
 
-          {/* Contact + Certificates */}
+          {/* CONTACT */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Contact</h3>
-            <ul className="space-y-2 text-slate-300 text-sm">
-              <li>📞 +91 98765 43210</li>
-              <li>📧 info@hopeforall.org</li>
-              <li>🌐 www.hopeforall.org</li>
+            <h3 className="text-2xl font-bold mb-5 text-blue-200">
+              Contact Us
+            </h3>
+
+            <ul className="space-y-4 text-lg text-slate-300">
+              <li className="flex items-center gap-3">
+                <Phone size={20} /> +91 74836 64359
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={20} /> trishulatrust@gmail.com
+              </li>
+              <li className="flex items-center gap-3">
+                <Globe size={20} /> www.trishulatrust.org
+              </li>
             </ul>
 
-            <div className="mt-4 rounded-xl border border-white/15 bg-white/5 p-4 backdrop-blur">
-              <p className="font-semibold text-white">🧾 NGO 18G Certificate</p>
-              <p className="text-xs mt-1 text-slate-300">
-                Donations are eligible for tax benefits under Section 18G.
+            <div className="mt-6 p-6 rounded-2xl bg-white/5 border border-white/15">
+              <p className="font-bold text-xl text-blue-100">
+                🧾 80G Tax Benefit
               </p>
-              <a
-                href="#certificate"
-                className="inline-block mt-2 text-[#F6C20E] text-xs hover:underline"
-              >
-                View Certificate →
-              </a>
-            </div>
-
-            {/* Socials */}
-            <div className="mt-4 flex flex-wrap items-center gap-2">
-              {["Facebook", "X", "Instagram", "LinkedIn", "YouTube"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="rounded-full bg-[#FFF4BE]/10 px-3 py-1.5 text-xs text-white/90 ring-1 ring-white/15 hover:bg-[#FFF4BE]/20 transition"
-                >
-                  {s}
-                </a>
-              ))}
+              <p className="text-base mt-2 text-slate-300">
+                Donations are eligible for tax exemption under Section 80G.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* middle highlight bar */}
-        <div className="mt-10 h-1.5 w-28 rounded-full bg-[#F6C20E] opacity-90 animate-fade-up" />
+        {/* DIVIDER */}
+        <div className="mt-14 h-1.5 w-36 rounded-full bg-gradient-to-r from-blue-500 to-blue-300" />
 
-        {/* bottom row */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row">
-          <p>© {new Date().getFullYear()} HopeForAll Foundation. All rights reserved.</p>
+        {/* BOTTOM */}
+        <div className="mt-10 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/10 pt-6 text-base text-slate-400">
+          <p>© {new Date().getFullYear()} Trishula Trust. All rights reserved.</p>
 
-           
-
-          {/* payment icons (text pills as placeholders) */}
-          <div className="flex flex-wrap items-center gap-2">
-            {["Powered by innometrics tech"].map((p) => (
-              <span
-                key={p}
-                className="rounded-full bg-white/8 px-2.5 py-1 text-[10px] text-white/90 ring-1 ring-white/15"
-              >
-                {p}
-              </span>
-            ))}
-          </div>
+          <span className="px-5 py-2 rounded-full bg-white/10 ring-1 ring-white/15">
+            Powered by Innometrics Tech
+          </span>
         </div>
+
       </div>
     </footer>
   );

@@ -1,284 +1,167 @@
-// src/components/Contact.jsx
 import React, { useState } from "react";
-
-const YELLOW = "#F6C20E";
+import { 
+  Send, MapPin, Phone, Mail, 
+  MessageSquare, User, Sparkles, 
+  CheckCircle, Loader2, Globe, Heart, ChevronRight
+} from 'lucide-react';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "", agree: false });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const onChange = (e) => {
-    const { name, type, checked, value } = e.target;
-    setForm((f) => ({ ...f, [name]: type === "checkbox" ? checked : value }));
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
-    setSent(false);
     setSending(true);
+    // Simulation
     setTimeout(() => {
       setSending(false);
       setSent(true);
-      setForm({ name: "", email: "", subject: "", message: "", agree: false });
-    }, 900);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSent(false), 5000);
+    }, 2000);
   };
 
-  const d = (ms) => ({ animationDelay: `${ms}ms` });
-
   return (
-    <section
-      id="contact"
-      className="
-        relative overflow-hidden
-        bg-[#fffdf6] text-zinc-900
-        px-6 py-16 sm:py-20 lg:py-24
-      "
-    >
-      {/* soft vignette to match site feel */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),transparent)]" />
-
-      <div className="mx-auto max-w-7xl">
-        {/* Heading */}
-        <div className="text-center">
-          <h2
-            className="animate-fade-up text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900"
-            style={d(40)}
-          >
-            Contact Us
-          </h2>
-          <p
-            className="animate-fade-up mt-3 mx-auto max-w-2xl text-zinc-600"
-            style={d(120)}
-          >
-            We’d love to hear from you — questions, ideas, or ways to get involved.
-            Let’s create happier childhoods together.
-          </p>
-          <div className="mt-4 flex justify-center">
-            <span className="h-1.5 w-24 rounded-full" style={{ backgroundColor: YELLOW }} />
-          </div>
+    <section className="relative min-h-screen bg-white py-20 px-4 md:px-8 overflow-hidden font-sans">
+      
+      {/* Background Hero */}
+      <div className="max-w-7xl mx-auto text-center mb-16 relative z-10">
+        <div className="inline-flex items-center gap-2 px-6 py-2 bg-amber-500/10 border border-amber-200 rounded-full mb-8">
+          <Sparkles className="w-5 h-5 text-amber-600" />
+          <span className="font-bold text-amber-700 uppercase tracking-widest text-xs">Get In Touch</span>
         </div>
+        <h2 className="text-6xl md:text-8xl font-serif text-slate-900 mb-6">
+          Connect with <span className="text-amber-500 italic">Purpose</span>
+        </h2>
+        <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          Unga questions or support ethuva irunthalum nanga help panna ready-ah irukkom.
+        </p>
+      </div>
 
-        {/* Content grid */}
-        <div className="mt-10 grid gap-10 lg:grid-cols-2">
-          {/* LEFT: Form Card */}
-          <div
-            className="
-              animate-fade-up
-              rounded-3xl border border-zinc-200 bg-white
-              p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,.08)]
-            "
-            style={d(160)}
-          >
-            <form onSubmit={onSubmit} className="space-y-5">
-              {/* Name */}
-              <label className="block">
-                <span className="mb-1 block text-sm text-zinc-700">Your Name</span>
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={onChange}
-                  placeholder="e.g., Aisha Khan"
-                  className="
-                    w-full rounded-xl border border-zinc-200 bg-white
-                    px-4 py-3 text-zinc-900 placeholder:text-zinc-400
-                    outline-none transition focus:ring-4 focus:ring-[rgba(246,194,14,.28)]
-                  "
-                />
-              </label>
-
-              {/* Email + Subject */}
-              <div className="grid gap-5 sm:grid-cols-2">
-                <label className="block">
-                  <span className="mb-1 block text-sm text-zinc-700">Email</span>
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={onChange}
-                    placeholder="you@example.com"
-                    className="
-                      w-full rounded-xl border border-zinc-200 bg-white
-                      px-4 py-3 text-zinc-900 placeholder:text-zinc-400
-                      outline-none transition focus:ring-4 focus:ring-[rgba(246,194,14,.28)]
-                    "
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-sm text-zinc-700">Subject (optional)</span>
-                  <input
-                    name="subject"
-                    type="text"
-                    value={form.subject}
-                    onChange={onChange}
-                    placeholder="How can we help?"
-                    className="
-                      w-full rounded-xl border border-zinc-200 bg-white
-                      px-4 py-3 text-zinc-900 placeholder:text-zinc-400
-                      outline-none transition focus:ring-4 focus:ring-[rgba(246,194,14,.28)]
-                    "
-                  />
-                </label>
-              </div>
-
-              {/* Message */}
-              <label className="block">
-                <span className="mb-1 block text-sm text-zinc-700">Your Message</span>
-                <textarea
-                  name="message"
-                  rows={5}
-                  required
-                  value={form.message}
-                  onChange={onChange}
-                  placeholder="Tell us how you'd like to help…"
-                  className="
-                    w-full resize-y rounded-xl border border-zinc-200 bg-white
-                    px-4 py-3 text-zinc-900 placeholder:text-zinc-400
-                    outline-none transition focus:ring-4 focus:ring-[rgba(246,194,14,.28)]
-                  "
-                />
-              </label>
-
-              {/* Consent */}
-              <label className="flex items-start gap-3 text-sm text-zinc-700">
-                <input
-                  type="checkbox"
-                  name="agree"
-                  checked={form.agree}
-                  onChange={onChange}
-                  className="mt-1 h-4 w-4 rounded border-zinc-300 text-black focus:ring-[rgba(246,194,14,.35)]"
-                />
-                <span>
-                  I agree to be contacted and accept the{" "}
-                  <a href="#privacy" className="underline decoration-[--yellow] underline-offset-2" style={{ ["--yellow"]: YELLOW }}>
-                    privacy policy
-                  </a>.
-                </span>
-              </label>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={sending || !form.agree}
-                className="
-                  relative mt-2 inline-flex w-full items-center justify-center gap-2
-                  rounded-xl px-6 py-3 text-center font-semibold transition
-                  hover:-translate-y-0.5 focus:outline-none focus:ring-4
-                  disabled:cursor-not-allowed disabled:opacity-70
-                  group
-                "
-                style={{
-                  backgroundColor: YELLOW,
-                  boxShadow: "0 14px 30px rgba(246,194,14,.35)",
-                }}
-              >
-                {/* shine on hover */}
-                <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
-                  <span className="absolute -left-1/3 top-0 h-full w-1/3 translate-x-[-120%] opacity-0 bg-white/40 rotate-[12deg] group-hover:animate-shine" />
-                </span>
-                {sending ? "Sending…" : "Send Message"}
-              </button>
-
-              {/* Success note */}
-              {sent && (
-                <div className="animate-pop rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
-                  ✅ Thanks! We’ll get back to you within 24–48 hours.
-                </div>
-              )}
-            </form>
-
-            {/* assurances */}
-            <div className="mt-5 flex flex-wrap items-center gap-4 text-xs text-zinc-600">
-              <span>📨 Replies within 24–48 hrs</span>
-              <span className="h-3 w-px bg-zinc-200" />
-              <span>🔒 Your info stays private</span>
-              <span className="h-3 w-px bg-zinc-200" />
-              <span>🤝 80G receipts available</span>
-            </div>
+      {/* --- MASSIVE ATTRACTIVE CONTACT BOX --- */}
+      <div className="max-w-6xl mx-auto relative z-20">
+        <div className="relative overflow-hidden bg-white rounded-[60px] shadow-[0_60px_120px_-20px_rgba(0,0,0,0.2)] border-[10px] border-white">
+          
+          {/* Background Images Layer */}
+          <div className="absolute inset-0 flex flex-row opacity-[0.2] pointer-events-none">
+            <img 
+              src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800" 
+              className="w-1/2 h-full object-cover border-r-2 border-white" 
+              alt="Child Support Left" 
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=800" 
+              className="w-1/2 h-full object-cover" 
+              alt="Child Support Right" 
+            />
           </div>
 
-          {/* RIGHT: Info + Decorative Image */}
-          <div className="space-y-6">
-            {/* Decorative image card */}
-            <div
-              className="animate-fade-up relative rounded-[2rem] border border-zinc-200 bg-white shadow-[0_25px_60px_rgba(0,0,0,.08)]"
-              style={d(200)}
-            >
-              {/* soft aura */}
-              <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(246,194,14,.28),transparent)] blur-2xl" />
-              <div className="overflow-hidden rounded-[2rem]">
-                <img
-                  src="/mnt/data/7be44299-4fa4-4487-bec9-d96584df13ca.png"
-                  alt="Community in action"
-                  className="block h-64 w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                />
+          {/* Form Content */}
+          <div className="relative z-10 p-10 md:p-20 bg-white/60 backdrop-blur-md">
+            {sent ? (
+              <div className="text-center py-24 animate-in fade-in zoom-in duration-700">
+                <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+                    <CheckCircle size={50} />
+                </div>
+                <h2 className="text-5xl font-serif text-slate-900 mb-4">Message Sent!</h2>
+                <p className="text-slate-600 text-xl font-medium">Nanga unga message-ah receive panniten. 24 hours-la reply pannuvom.</p>
               </div>
-              {/* floating chips */}
-              <div
-                className="pointer-events-none absolute -right-3 top-3 rounded-xl bg-[#FFF4BE] px-3 py-2 text-xs text-zinc-900 border border-black/5 shadow animate-float"
-                style={{ animationDelay: "300ms" }}
-              >
-                🎒 Education Drives
-              </div>
-              <div
-                className="pointer-events-none absolute -left-3 bottom-3 rounded-xl bg-[#FFF4BE] px-3 py-2 text-xs text-zinc-900 border border-black/5 shadow animate-float"
-                style={{ animationDelay: "900ms" }}
-              >
-                🥗 Nutrition Camps
-              </div>
-            </div>
-
-            {/* Contact details card */}
-            <div
-              className="animate-fade-up rounded-2xl border border-zinc-200 bg-white p-6 shadow-[0_12px_30px_rgba(0,0,0,.06)]"
-              style={d(260)}
-            >
-              <h3 className="text-lg font-semibold text-zinc-900">Reach Us</h3>
-              <div className="mt-3 space-y-3 text-sm text-zinc-700">
-                <p>📍 HopeForAll Foundation<br />123 Charity Avenue, Greenfield Colony,<br />Hyderabad, Telangana 500089</p>
-                <p>📧 info@hopeforall.org</p>
-                <p>📞 +91 98765 43210</p>
-                <p>🕒 Mon–Sat: 10:00 AM – 6:00 PM</p>
-              </div>
-
-              {/* Socials */}
-              <div className="mt-4 flex items-center gap-3">
-                {["facebook", "x", "instagram", "linkedin", "youtube"].map((s) => (
-                  <a
-                    key={s}
-                    href="#"
-                    aria-label={s}
-                    className="rounded-full bg-[#FFF4BE] px-3 py-2 text-xs font-semibold text-zinc-900 ring-1 ring-black/5 hover:translate-y-[-1px] transition"
-                  >
-                    {s.charAt(0).toUpperCase() + s.slice(1)}
-                  </a>
-                ))}
-              </div>
-
-              {/* mini badges */}
-              <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-                {[
-                  ["Projects", "140+"],
-                  ["Lives", "2.1M+"],
-                  ["Years", "40+"],
-                ].map(([k, v]) => (
-                  <div key={k} className="rounded-xl bg-white p-3 text-sm shadow ring-1 ring-zinc-200">
-                    <div className="font-bold text-zinc-900">{v}</div>
-                    <div className="text-zinc-600">{k}</div>
+            ) : (
+              <form onSubmit={onSubmit} className="flex flex-col gap-10">
+                
+                <div className="grid md:grid-cols-2 gap-10">
+                  {/* Name Input */}
+                  <div className="space-y-4">
+                    <label className="text-xs font-black uppercase tracking-[0.3em] text-slate-400 ml-6 flex items-center gap-2">
+                      <User size={14} className="text-amber-500"/> Your Full Name
+                    </label>
+                    <input 
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({...form, name: e.target.value})}
+                      className="w-full bg-slate-50 border-4 border-transparent rounded-[40px] px-10 py-10 text-3xl md:text-4xl font-black text-slate-800 outline-none focus:bg-white focus:border-amber-500 transition-all shadow-xl"
+                      placeholder="Enter Name"
+                    />
                   </div>
-                ))}
-              </div>
+
+                  {/* Email Input */}
+                  <div className="space-y-4">
+                    <label className="text-xs font-black uppercase tracking-[0.3em] text-slate-400 ml-6 flex items-center gap-2">
+                      <Mail size={14} className="text-amber-500"/> Email Address
+                    </label>
+                    <input 
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({...form, email: e.target.value})}
+                      className="w-full bg-slate-50 border-4 border-transparent rounded-[40px] px-10 py-10 text-3xl md:text-4xl font-black text-slate-800 outline-none focus:bg-white focus:border-amber-500 transition-all shadow-xl"
+                      placeholder="email@example.com"
+                    />
+                  </div>
+                </div>
+
+                {/* Message Textarea */}
+                <div className="space-y-4">
+                  <label className="text-xs font-black uppercase tracking-[0.3em] text-slate-400 ml-6 flex items-center gap-2">
+                    <MessageSquare size={14} className="text-amber-500"/> How can we help?
+                  </label>
+                  <textarea 
+                    required
+                    rows={4}
+                    value={form.message}
+                    onChange={(e) => setForm({...form, message: e.target.value})}
+                    className="w-full bg-slate-50 border-4 border-transparent rounded-[45px] px-10 py-10 text-3xl font-bold text-slate-800 outline-none focus:bg-white focus:border-amber-500 transition-all shadow-xl resize-none"
+                    placeholder="Type your message here..."
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="flex justify-center mt-6">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full md:w-[500px] h-[120px] bg-slate-900 text-white rounded-[45px] font-black text-3xl hover:bg-black transition-all flex items-center justify-center gap-6 shadow-2xl disabled:bg-slate-400 group"
+                  >
+                    {sending ? (
+                      <Loader2 className="animate-spin" size={40} />
+                    ) : (
+                      <>
+                        Send Message <Send size={32} className="group-hover:translate-x-3 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* Bottom Contact Badges */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-slate-100 mt-12">
+               <div className="flex items-center gap-4 justify-center">
+                  <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center"><Phone size={24}/></div>
+                  <div className="text-left">
+                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Call Us</p>
+                     <p className="text-sm font-bold text-slate-800">+91 74836 64359</p>
+                  </div>
+               </div>
+               <div className="flex items-center gap-4 justify-center border-x border-slate-100 px-8">
+                  <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center"><Globe size={24}/></div>
+                  <div className="text-left">
+                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Location</p>
+                     <p className="text-sm font-bold text-slate-800">Bangalore, India</p>
+                  </div>
+               </div>
+               <div className="flex items-center gap-4 justify-center">
+                  <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center"><Heart size={24}/></div>
+                  <div className="text-left">
+                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Support</p>
+                     <p className="text-sm font-bold text-slate-800">24/7 Response</p>
+                  </div>
+               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* bottom paint sweep for section separation */}
-      <div className="mx-auto mt-16 h-6 max-w-7xl rounded-full bg-[#f6c20ea6] blur-[2px]" />
     </section>
   );
 }
