@@ -86,18 +86,19 @@ export default function Navbar() {
 
             {/* LOGO */}
             <Link to="/" onClick={handleNavClick} className="flex items-center gap-4">
-              <img
-                src={logo}
-                alt="Trishula Trust Logo"
-                className="
-                  h-[80px] w-[220px]
-                  sm:h-[90px] sm:w-[300px]
-                  md:h-[100px] md:w-[300px]
-                  ml-0 md:-ml-[280px]
-                  object-cover
-                  transition-transform duration-300 hover:scale-105
-                "
-              />
+            <img
+  src={logo}
+  alt="Trishula Trust Logo"
+  className="
+    h-[80px] w-[220px]
+    sm:h-[90px] sm:w-[300px]
+    md:h-[100px] md:w-[300px]
+    ml-0 md:-ml-[280px]
+    object-contain
+    transition-transform duration-300 hover:scale-105
+  "
+/>
+
 
               <div className="ml-0 text-center md:-ml-[50px] md:text-left">
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-blue-900 tracking-wide">
